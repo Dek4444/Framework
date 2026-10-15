@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe.js';
+import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,9 +11,13 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-      enableDebugMessages: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     })
   )
+
+  app.useGlobalInterceptors(new TransformResponseInterceptor());  
 
   await app.listen(3000);
 }
