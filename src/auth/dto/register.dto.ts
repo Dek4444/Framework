@@ -5,7 +5,7 @@ export class RegisterDto {
     @IsNotEmpty({ message: 'Username harus diisi' })
     readonly username: string;
 
-    @IsEmail({ message: 'Email tidak valid' })
+    @IsEmail(() { message: 'Email tidak valid' })
     @IsNotEmpty({ message: 'Email harus diisi' })
     readonly email: string;
 
