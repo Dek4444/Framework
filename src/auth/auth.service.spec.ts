@@ -15,4 +15,11 @@ describe('AuthService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('logs in with a username and password', () => {
+    expect(service.login({ username: 'aurel', password: '123' })).toMatchObject({
+      username: 'aurel',
+      password: '123',
+    });
+  });
 });
